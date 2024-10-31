@@ -7,13 +7,17 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
         }
-
+        .title {
+        font-size: 4em;
+        margin-bottom: 20px;
+        }
         .traffic-light {
             background-color: white;
             width:180px;
@@ -48,24 +52,39 @@
         .light.active{
             opacity: 1;
         }
+        .msg {
+            text-align: center;
+            font-size: 3em;
+            margin-top: 10px;
+        }
 
     </style>
 </head>
 <body>
+    <h2 class="title">Traffic Light</h2>
     <div class="traffic-light">
         <div class="light red active"></div>
         <div class="light yellow"></div>
         <div class="light green"></div>
     </div>
-
+    <div class="msg"></div>
     <script>
      let currentLight = 0;
      const lights = document.querySelectorAll(".light");
+     const msg=document.querySelector(".msg");
 
      function changeLight() {
         lights[currentLight].classList.remove('active');
         currentLight=(currentLight + 1)%lights.length;
         lights[currentLight].classList.add('active');
+
+        if(lights[currentLight].classList.contains("red")) {
+        msg.innerText="Stop !";
+        }else if(lights[currentLight].classList.contains("yellow")){
+            msg.innerText="Be Ready!";
+        }else{
+            msg.innerText="Go Now.";  
+        }
      }
      setInterval(changeLight, 2000); 
     </script>
